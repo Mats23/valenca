@@ -1,12 +1,15 @@
 defmodule ValencaWeb.ClientController do
   use ValencaWeb, :controller
   require Logger
+
   alias Valenca.{
     Client
   }
+
   alias Valenca.Client.{
     ClientsServices
   }
+
   def index(conn, _params) do
     with {:ok, clients} <- ClientsServices.get_all() do
       render(conn, "list.json", %{clients: clients})

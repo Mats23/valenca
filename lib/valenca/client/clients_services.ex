@@ -3,10 +3,11 @@ defmodule Valenca.Client.ClientsServices do
     Client,
     Repo
   }
+
   require Logger
 
   def create(client, params) do
-    with {:ok, created_client} <- Client.create_client(client ,params) do
+    with {:ok, created_client} <- Client.create_client(client, params) do
       created_client
     end
   end
@@ -15,6 +16,7 @@ defmodule Valenca.Client.ClientsServices do
     clients =
       Client
       |> Repo.all()
+
     {:ok, clients}
   end
 end

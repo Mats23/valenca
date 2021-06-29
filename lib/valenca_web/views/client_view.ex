@@ -7,7 +7,7 @@ defmodule ValencaWeb.ClientView do
     %{data: view_clients}
   end
 
-  def render("show.json",%{client: client}) do
+  def render("show.json", %{client: client}) do
     %{
       name: client.name,
       cpf: client.cpf,
@@ -19,13 +19,13 @@ defmodule ValencaWeb.ClientView do
   defp transform_list(list) do
     list
     |> Enum.map(fn client ->
-     %{
-      id: client.id,
-      name: client.name,
-      cpf: client.cpf,
-      email: client.email,
-      phone: client.phone
-     }
+      %{
+        id: client.id,
+        name: client.name,
+        cpf: client.cpf,
+        email: client.email,
+        phone: client.phone
+      }
     end)
     |> Enum.sort(&(&1.id < &2.id))
   end
