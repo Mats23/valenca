@@ -16,7 +16,7 @@ defmodule ValencaWeb.Router do
   scope "/api", ValencaWeb do
     pipe_through(:api)
 
-    resources("/client", ClientController)
+    resources("/client", ClientController, only: [:index, :create, :show])
   end
 
   # Other scopes may use custom stacks.

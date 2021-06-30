@@ -1,19 +1,12 @@
 defmodule Valenca.Client do
   use Ecto.Schema
   import Ecto.Changeset
-  import Ecto.Query
+  import Ecto.Query, only: [from: 2]
   require Logger
 
   alias Valenca.{
     Repo
   }
-
-  @type t :: %__MODULE__{
-          name: String.t(),
-          cpf: String.t(),
-          email: String.t(),
-          phone: String.t()
-        }
 
   schema "client" do
     field(:name, :string)
@@ -34,4 +27,21 @@ defmodule Valenca.Client do
     |> changeset(params)
     |> Repo.insert()
   end
+
+  def find_by_id(id),
+    do:
+      Repo.all(
+        from(client in __MODULE__,
+          where: client.id == ^id,
+          select: %{
+            id: client.id,
+            name: client.name,
+            cpf: client.cpf,
+            email: client.email,
+            phone: client.phone
+          }
+        )
+      )
+
+  def exist?(cpf), do: Repo.exists?(from(c in __MODULE__, where: c.cpf == ^cpf))
 end

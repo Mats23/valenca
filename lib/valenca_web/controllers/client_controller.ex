@@ -17,8 +17,16 @@ defmodule ValencaWeb.ClientController do
   end
 
   def create(conn, params) do
-    with client <- ClientsServices.create(%Client{}, params) do
+    with {:ok, client} <- ClientsServices.create(params) do
       render(conn, "show.json", %{client: client})
+    else
+      {:error, :client_exist} -> send_resp(conn, 409, "")
+    end
+  end
+
+  def show(conn, %{"id" => id}) do
+    with client <- ClientsServices.find_by_id(id) do
+      render(conn, "list.json", %{clients: client})
     end
   end
 end
