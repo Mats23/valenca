@@ -1,4 +1,9 @@
-/.tool-versions
-/_build 
-/.elixir_ls
+/_build
+/db
 /deps
+
+/assets
+
+/.tool-versions
+
+/.elixir_ls/
